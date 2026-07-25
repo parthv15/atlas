@@ -1,11 +1,13 @@
+import { readWebEnvironment } from "@atlas/config";
 import { healthResponseSchema } from "@atlas/contracts";
+
+import { AuthControls } from "../components/auth-controls";
+import { getServerSession } from "../lib/get-server-session";
 
 export const dynamic = "force-dynamic";
 
 async function getIndexerStatus() {
-  const indexerUrl =
-    process.env.ATLAS_INDEXER_URL?.replace(/\/$/, "") ??
-    "http://localhost:4000";
+  const indexerUrl = readWebEnvironment().ATLAS_INDEXER_URL.replace(/\/$/, "");
 
   try {
     const response = await fetch(`${indexerUrl}/v1/health`, {
@@ -25,15 +27,22 @@ async function getIndexerStatus() {
 }
 
 export default async function Home() {
-  const indexer = await getIndexerStatus();
+  const [indexer, session] = await Promise.all([
+    getIndexerStatus(),
+    getServerSession(),
+  ]);
 
   return (
     <main>
-      <div className="eyebrow">Atlas · Genesis</div>
+      <header className="site-header">
+        <div className="eyebrow">Atlas · Genesis</div>
+        <AuthControls />
+      </header>
       <h1>Repository context starts here.</h1>
       <p className="lede">
-        Atlas will connect to GitHub, index repository activity through the
-        Atlas Indexer, and make engineering context easy to explore.
+        {session
+          ? `Welcome back, ${session.user.name}. Atlas is ready to connect your GitHub repositories.`
+          : "Sign in with GitHub to connect repositories, index their activity, and make engineering context easy to explore."}
       </p>
 
       <section className="status" aria-label="Indexer connection status">

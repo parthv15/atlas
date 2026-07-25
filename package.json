@@ -11,5 +11,8 @@
     "build": "pnpm -r build",
     "typecheck": "pnpm -r typecheck",
     "lint": "pnpm --filter @atlas/web lint && pnpm --filter @atlas/indexer lint"
+  },
+  "devDependencies": {
+    "dotenv-cli": "11.0.0"
   }
 }
