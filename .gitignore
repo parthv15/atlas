@@ -13,3 +13,5 @@ coverage
 .DS_Store
 
 handover.md
+
+.pnpm-store/

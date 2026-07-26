@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 
-import { authClient } from "../lib/auth-client";
 import { useSession } from "../hooks/use-session";
+import { authClient } from "../lib/auth-client";
+import { Button } from "./ui/button";
 
 export function AuthControls() {
   const [pending, setPending] = useState(false);
@@ -29,26 +30,34 @@ export function AuthControls() {
   }
 
   return (
-    <div className="auth-controls">
+    <div className="flex items-center gap-3">
       {session?.user ? (
         <>
-          <span>{session.user.email}</span>
-          <button disabled={pending} onClick={signOut} type="button">
+          <span className="hidden text-sm text-muted-foreground sm:inline">
+            {session.user.email}
+          </span>
+          <Button
+            disabled={pending}
+            onClick={signOut}
+            type="button"
+            variant="outline"
+          >
             {pending ? "Signing out…" : "Sign out"}
-          </button>
+          </Button>
         </>
       ) : (
-        <button
+        <Button
           disabled={pending || sessionPending}
           onClick={signIn}
           type="button"
+          variant="outline"
         >
           {sessionPending
             ? "Loading session…"
             : pending
               ? "Redirecting…"
               : "Sign in with GitHub"}
-        </button>
+        </Button>
       )}
     </div>
   );
