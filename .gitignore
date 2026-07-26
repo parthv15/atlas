@@ -15,3 +15,7 @@ coverage
 handover.md
 
 .pnpm-store/
+
+# GitHub App private keys. Broader than GitHub's own filename, because a
+# renamed key is still a key.
+*.pem
