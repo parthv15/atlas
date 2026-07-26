@@ -3,6 +3,7 @@ node_modules
 dist
 .turbo
 coverage
+*.tsbuildinfo
 
 .env
 .env.local
