@@ -1,6 +1,7 @@
 import {
   bigint,
   bigserial,
+  index,
   jsonb,
   pgEnum,
   pgTable,
@@ -8,6 +9,8 @@ import {
   timestamp,
   uniqueIndex,
 } from "drizzle-orm/pg-core";
+
+import { user } from "./auth-schema";
 
 export const syncStatus = pgEnum("sync_status", [
   "pending",
@@ -23,9 +26,14 @@ export const githubInstallations = pgTable(
     githubInstallationId: bigint("github_installation_id", {
       mode: "number",
     }).notNull(),
-    atlasAccountId: text("atlas_account_id").notNull(),
+    atlasAccountId: text("atlas_account_id")
+      .references(() => user.id, { onDelete: "cascade" })
+      .notNull(),
+    /** The GitHub account id survives a login rename; the login does not. */
+    githubAccountId: bigint("github_account_id", { mode: "number" }).notNull(),
     githubAccountLogin: text("github_account_login").notNull(),
     githubAccountType: text("github_account_type").notNull(),
+    suspendedAt: timestamp("suspended_at", { withTimezone: true }),
     createdAt: timestamp("created_at", { withTimezone: true })
       .defaultNow()
       .notNull(),
@@ -37,6 +45,7 @@ export const githubInstallations = pgTable(
     uniqueIndex("github_installations_github_id_unique").on(
       table.githubInstallationId,
     ),
+    index("github_installations_atlas_account_id_idx").on(table.atlasAccountId),
   ],
 );
 

@@ -18,5 +18,8 @@ export function createDatabase(databaseUrl: string) {
   };
 }
 
+/** The schema-aware Drizzle client, for consumers that accept one. */
+export type Database = ReturnType<typeof createDatabase>["db"];
+
 export * from "./auth-schema";
 export * from "./schema";
