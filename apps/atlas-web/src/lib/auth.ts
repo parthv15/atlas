@@ -1,15 +1,14 @@
 import { readWebEnvironment } from "@atlas/config";
-import { createDatabase } from "@atlas/database";
 import * as schema from "@atlas/database";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { betterAuth } from "better-auth/minimal";
 
-const environment = readWebEnvironment();
-const { db } = createDatabase(environment.DATABASE_URL);
+import { database } from "./database";
 
+const environment = readWebEnvironment();
 export const auth = betterAuth({
   baseURL: environment.BETTER_AUTH_URL,
-  database: drizzleAdapter(db, {
+  database: drizzleAdapter(database, {
     provider: "pg",
     schema,
   }),
