@@ -4,16 +4,8 @@ import Fastify, {
 } from "fastify";
 
 import { type HealthResponse } from "@atlas/contracts";
-import type { GitHubAppClient } from "@atlas/github";
-
-import { registerInstallationRoutes } from "./installations/routes";
-import type { InstallationStore } from "./installations/store";
 
 export interface AppDependencies {
-  githubClient: GitHubAppClient;
-  installationStore: InstallationStore;
-  serviceToken: string;
-  /** A pino logger satisfies this. Omitted in tests to keep output quiet. */
   logger?: FastifyBaseLogger;
 }
 
@@ -35,12 +27,6 @@ export function buildApp(dependencies: AppDependencies): FastifyInstance {
     status: "ok",
     timestamp: new Date().toISOString(),
   }));
-
-  registerInstallationRoutes(app, {
-    githubClient: dependencies.githubClient,
-    installationStore: dependencies.installationStore,
-    serviceToken: dependencies.serviceToken,
-  });
 
   return app;
 }
