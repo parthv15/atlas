@@ -2,39 +2,41 @@
 
 ## Vision
 
-Genesis is a workspace-oriented application prototype with a relational system
-of record and room for later AI-powered exploration.
+Genesis is a knowledge platform that indexes GitHub data into a relational
+database and later projects it into a graph for AI-powered exploration.
 
 The user-facing application is **Atlas**. The two Phase 1 services are:
 
-- `atlas-web`: the Next.js application for authentication, Atlas accounts,
-  workspace onboarding, and workspace views.
-- `atlas-indexer`: an independently deployable Fastify service for future
-  backend capabilities.
+- `atlas-web`: the Next.js application for authentication, GitHub App
+  installation, dashboard views, and indexing controls.
+- `atlas-indexer`: the Fastify service that owns GitHub integration, ingestion,
+  background processing, and indexed-data APIs.
 
 ## Goals
 
 - Learn modern backend architecture.
-- Learn authentication, tenancy, and service boundaries.
+- Build a production-quality GitHub App.
 - Keep PostgreSQL-compatible SQL as the system of record.
 - Add Neo4j and AI only after the core ingestion pipeline is complete.
 
 ## Phase 1 (Genesis)
 
-- Authentication
-- Atlas account creation
-- Workspace onboarding
-- Workspace membership and roles
-- Workspace-scoped server and client context
+- GitHub App installation
+- Initial repository sync
+- GitHub webhook ingestion
+- Store metadata in SQL
+- Dashboard for indexed data
+- Manual re-sync
 
 ## Delivery Milestones
 
 1. Scaffold the pnpm monorepo and shared packages.
 2. Scaffold `atlas-web`.
 3. Scaffold `atlas-indexer`.
-4. Create Atlas accounts, workspaces, and memberships.
-5. Add workspace onboarding and direct slug routing.
-6. Add a workspace-scoped Atlas context.
+4. Implement the authenticated Atlas-to-GitHub App installation flow.
+5. Verify and persist installations in `atlas-indexer`, then queue initial sync.
+6. Receive, verify, record, and asynchronously process GitHub webhooks.
+7. Expose indexed data through a versioned API consumed by `atlas-web`.
 
 ## Non-goals
 
