@@ -1,15 +1,13 @@
 # Atlas
 
-Atlas indexes GitHub repository data into PostgreSQL so engineering context can
-be explored from a web application.
+Atlas is a workspace-oriented application prototype.
 
 ## Workspace
 
-- `apps/atlas-web`: Next.js frontend and GitHub App installation experience.
-- `apps/atlas-indexer`: Fastify API, webhook receiver, and ingestion service.
+- `apps/atlas-web`: Next.js application, authentication, and workspaces.
+- `apps/atlas-indexer`: Fastify service with a versioned health API.
 - `packages/contracts`: shared Zod API contracts.
 - `packages/database`: Drizzle schema and database client.
-- `packages/github`: GitHub App integration.
 - `packages/config`: environment parsing.
 - `packages/logging`: structured logging.
 
@@ -45,5 +43,5 @@ pnpm build
 
 ## Current milestone
 
-The monorepo and web-to-indexer health path are established. The next milestone
-is the authenticated GitHub App installation flow.
+Atlas account creation, workspace onboarding, direct workspace routing, and
+the shared Atlas context are established.
