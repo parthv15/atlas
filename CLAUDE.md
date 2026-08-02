@@ -19,3 +19,13 @@ run or expanded.
 
 This rule applies repository-wide unless the user explicitly reverses it in a
 later request.
+
+## Design standards
+
+Before writing or changing any UI in `apps/atlas-web`, read
+[04_Design_Standards.md](04_Design_Standards.md) and follow it. It defines
+the color tokens, typography, and component patterns for the app, backed by
+the Tailwind/shadcn tokens in `apps/atlas-web/src/app/globals.css`. Use the
+existing Tailwind utility tokens (`bg-background`, `text-muted-foreground`,
+etc.) rather than hardcoded colors, and do not introduce colors, fonts, or
+radii outside that system without updating the standard first.
