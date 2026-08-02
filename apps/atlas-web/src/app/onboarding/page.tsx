@@ -31,7 +31,7 @@ export default async function OnboardingPage() {
     <main className="grid min-h-svh place-items-center px-6 py-12">
       <Card className="w-full max-w-lg">
         <CardHeader>
-          <div className="mb-3 text-xs font-semibold tracking-[0.2em] text-sky-300 uppercase">
+          <div className="mb-3 text-xs font-semibold tracking-[0.2em] text-primary uppercase">
             Atlas
           </div>
           <CardTitle className="text-2xl">Create your workspace</CardTitle>
