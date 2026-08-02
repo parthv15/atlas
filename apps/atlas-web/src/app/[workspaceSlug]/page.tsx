@@ -38,7 +38,7 @@ export default async function WorkspacePage({
       <div className="mx-auto max-w-5xl">
         <header className="flex flex-col justify-between gap-6 border-b pb-8 sm:flex-row sm:items-center">
           <div>
-            <div className="text-xs font-semibold tracking-[0.2em] text-sky-300 uppercase">
+            <div className="text-xs font-semibold tracking-[0.2em] text-primary uppercase">
               Atlas workspace
             </div>
             <h1 className="mt-2 text-4xl font-semibold tracking-tight">

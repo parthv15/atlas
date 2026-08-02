@@ -26,10 +26,16 @@ export default async function Home() {
 
   return (
     <main className="relative min-h-svh overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,oklch(0.28_0.08_250)_0,transparent_32rem)]" />
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(circle at 20% 0%, oklch(from var(--primary) l c h / 15%) 0, transparent 32rem)",
+        }}
+      />
       <div className="relative mx-auto w-full max-w-5xl px-6 py-12 sm:py-24">
         <header className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
-          <div className="text-xs font-semibold tracking-[0.2em] text-sky-300 uppercase">
+          <div className="text-xs font-semibold tracking-[0.2em] text-primary uppercase">
             Atlas · Genesis
           </div>
           <AuthControls />
@@ -59,7 +65,7 @@ export default async function Home() {
               <div
                 className={
                   indexer.connected
-                    ? "font-semibold text-emerald-400"
+                    ? "font-semibold text-success"
                     : "font-semibold text-destructive"
                 }
               >
